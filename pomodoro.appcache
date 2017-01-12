@@ -1,0 +1,11 @@
+CACHE MANIFEST
+# v1 2017-01-11
+index.html
+/src/assets/audio/beep.mp3
+/src/assets/css/style.css
+/src/assets/font/fontello.woff2
+/src/assets/favicon.png
+/dist/build.js
+
+NETWORK:
+*
