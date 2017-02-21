@@ -23,19 +23,14 @@
   const ONE_MINUTE_IN_SECONDS = 60
 
   export default {
-    props: ['pomos', 'history'],
+    props: ['pomos'],
+    data() {
+      return {
+        totalPomosToday: this.getTotalPomosCount(),
+        totalPomosCount: this.getTodayPomosCount()
+      }
+    },
     computed: {
-      totalPomosCount() {
-        return DB.read('pomosHistory').length || 0
-      },
-      totalPomosToday() {
-        if (DB.read('pomosHistory')) {
-          return DB.read('pomosHistory').filter((date) => {
-            return new Date(date).getDate() === new Date().getDate()
-          }).length
-        }
-        return 0;
-      },
       formatedPomos() {
         return this.pomos.map(pomo => {
           const DURATION_IN_MINUTES = pomo.duration / ONE_MINUTE_IN_SECONDS
@@ -62,7 +57,19 @@
           return new Date(date).toLocaleTimeString('pt-BR', DATE_FORMAT)
         }
         return '';
+      },
+      getTotalPomosCount() {
+        return DB.read('pomosHistory').length || 0
+      },
+      getTodayPomosCount() {
+        return DB.read('pomosHistory').filter((date) => {
+          return new Date(date).getDate() === new Date().getDate()
+        }).length || 0
       }
+    },
+    beforeUpdate() {
+      this.totalPomosCount = this.getTotalPomosCount()
+      this.totalPomosToday = this.getTodayPomosCount()
     }
   }
 </script>

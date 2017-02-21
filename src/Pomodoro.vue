@@ -93,10 +93,9 @@ export default {
       this.interval = setInterval(callback, ONE_SECOND)
     },
     clockTick(time) {
-      const SELF = this
       this.remainingTime = time
       this.newPomo(() => {
-        SELF.remainingTime--
+        this.remainingTime--
       })
     },
     formatTime(seconds) {
