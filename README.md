@@ -2,6 +2,11 @@
 
 > A simple timer based on the standard rules provided by The Pomodoro Technique
 
+TODO:
+
+- Notifications API
+- Enable/disable sound
+
 Developed with Vue <3
 
 ## Build Setup
