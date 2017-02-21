@@ -113,12 +113,7 @@ export default {
           if (!this.pomos[i].started) {
             timeStarted = new Date()
             this.pomos[i].started = timeStarted
-            if (this.pomos[i].duration !== POMODORO_25_MINUTES) {
-              DB.create('pomosHistory', timeStarted)
-              this.workIcon = false
-            } else {
-              this.workIcon = true
-            }
+            this.savePomodoro(i, timeStarted)
             this.clockTick(this.pomos[i].duration)
             break
           }
@@ -131,6 +126,14 @@ export default {
       return this.pomos.every(pomo => {
         return pomo.started
       })
+    },
+    savePomodoro(index, time) {
+      if (this.pomos[index].duration !== POMODORO_25_MINUTES) {
+        DB.create('pomosHistory', time)
+        this.workIcon = false
+      } else {
+        this.workIcon = true
+      }
     }
   },
   watch: {

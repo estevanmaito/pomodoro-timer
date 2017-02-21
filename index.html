@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage" manifest="pomodoro.appcache">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
   <head>
     <meta charset="utf-8">
     <meta name=viewport content="width=device-width, initial-scale=1.0">
@@ -44,5 +44,18 @@
   <body>
     <div id="app"></div>
     <script src="./dist/build.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
+              // Registration was successful
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch(function(err) {
+              // registration failed :(
+              console.log('ServiceWorker registration failed: ', err);
+            });
+          });
+        }
+    </script>
   </body>
 </html>
